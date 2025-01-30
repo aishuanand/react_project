@@ -19,20 +19,16 @@ jobs:
           node-version: 18.x
 
       - name: Install Dependencies
-        run: |
-          cd to do list
-          npm install
+        run: npm install
 
       - name: Build Project
-        run: |
-          cd to do list
-          npm run build
+        run: npm run build
 
       - name: Upload artifact to enable deployment
         uses: actions/upload-artifact@v3
         with:
           name: production-file
-          path: ./to do list/build
+          path: ./build
 
   # Deploy Job
   deploy:
@@ -43,10 +39,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: production-file
-          path: ./to do list/build
+          path: ./build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.KEY }} # this is the key of the access token
-          publish_dir: ./to do list/build
+          github_token: ${{ secrets.TO_DO_SECRET_KEY }} # this is the key of the access token
+          publish_dir: ./build
